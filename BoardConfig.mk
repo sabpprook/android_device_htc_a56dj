@@ -1,0 +1,55 @@
+# Vendor Init
+BOARD_VENDOR := htc
+
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := MSM8226
+TARGET_NO_BOOTLOADER := true
+
+# Platform
+TARGET_BOARD_PLATFORM := msm8226
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno305
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+TARGET_CPU_VARIANT := cortex-a7
+
+# Kernel
+BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=qcom user_debug=23 ehci-hcd.park=3 androidkey.dummy=1 androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x02000000 --second_offset 0x00f00000 --tags_offset 0x01e00000 --board recovery:0
+BOARD_MKBOOTIMG_ARGS += --dt device/htc/$(TARGET_DEVICE)/dt.img
+TARGET_PREBUILT_KERNEL := device/htc/$(TARGET_DEVICE)/kernel
+
+# Partitions
+BOARD_BOOTIMAGE_PARTITION_SIZE := 16777216
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 16777216
+BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
+TARGET_USERIMAGES_USE_EXT4 := true
+
+# Recovery
+BOARD_HAS_LARGE_FILESYSTEM := true
+BOARD_HAS_NO_MISC_PARTITION := true
+BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_RECOVERY_SWIPE := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+BOARD_USES_MMCUTILS := true
+
+# TWRP Build Flags
+TW_THEME := portrait_hdpi
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_INCLUDE_CRYPTO := true
+TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd
+TW_NO_EXFAT_FUSE := true
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TARGET_RECOVERY_DEVICE_MODULES := chargeled
+TW_INPUT_BLACKLIST := "hbtp_vm"
+
+# Vendor Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_$(TARGET_DEVICE)
